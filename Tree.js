@@ -10,7 +10,7 @@ export default class Tree {
             const nextValue = sorted[index + 1];
           //  console.log({currentValue, nextValue});
         });
-        // middle
+        // middle node
         return sorted[Math.floor(sorted.length / 2)];
     }
 
