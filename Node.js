@@ -5,5 +5,4 @@ export default class Node {
         this.left = null;
         this.right = null;
     }
-    setLinkedNode(direction, node) { this[direction] = node; }
 }
