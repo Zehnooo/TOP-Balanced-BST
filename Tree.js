@@ -66,8 +66,9 @@ export default class Tree {
             return true;
         }
 
-
+        // If target has one child node only
         if (node.left !== null && node.right === null || node.left === null && node.right !== null) {
+            // set the previous Node's child to the deletion Target's current child
             node.left !== null ? prevNode[direction] = node.left : prevNode[direction] = node.right;
             return true;
         }
