@@ -44,9 +44,9 @@ export default class Tree {
         lastNode[direction] = new Node(value);
     }
     deleteItem(value) {
-        if (!value) return false;
-        if (!this.includes(value)) return false;
-        if (this.root === null) return false;
+        if (!value) { console.log('Missing Value'); return false; }
+        if (!this.includes(value)) { console.log('Value not found in tree'); return false; }
+        if (this.root === null) { console.log("No tree root. Make sure a tree actually exists"); return false; }
         let prevNode = null;
         let node = this.root;
         let direction = '';
@@ -58,19 +58,26 @@ export default class Tree {
         }
 
         if (node === null) return false;
-        if (node.left === null && node.right === null) {
+
+        if ([node.left, node.right].every(n => n === null)) {
             // if target node is root AND leaf
             if (prevNode === null) this.root = null;
             prevNode[direction] = null;
-
             return true;
         }
 
-        if (node.left !== null || node.right !== null){
-            console.log('fuck');
+
+        if (node.left !== null && node.right === null || node.left === null && node.right !== null) {
+            node.left !== null ? prevNode[direction] = node.left : prevNode[direction] = node.right;
+            return true;
         }
 
 
+
+
         return true;
+    }
+    successor(value) {
+
     }
 }

@@ -20,8 +20,11 @@ t.insert(1000000);
 t.insert(11);
 t.insert(11);
 t.insert(11);
-t.deleteItem(6345);
+
 t.insert(24);
 t.insert(23);
 t.insert(25);
+t.deleteItem(9);
+t.deleteItem(24);
+t.deleteItem(324);
 prettyPrint(t.root);
