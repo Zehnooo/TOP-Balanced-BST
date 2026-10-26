@@ -156,5 +156,30 @@ export default class Tree {
         res.push(node.value);
     }
     #forEach(arr, func) { arr.forEach(x => func(x)); }
+    height(value) {
 
+        let node = this.#find(value);
+        if (node === undefined) return undefined;
+
+        return this.#heightRecur(node);
+    }
+    #heightRecur(node) {
+        if (node === null) return -1;
+
+        const leftHeight = this.#heightRecur(node.left);
+        const rightHeight = this.#heightRecur(node.right);
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    #find(value) {
+        let node = this.root;
+
+        while (node !== null) {
+            if (node.value === value) { return node; }
+            value < node.value ? node = node.left : node = node.right;
+        }
+
+        return undefined;
+    }
 }
