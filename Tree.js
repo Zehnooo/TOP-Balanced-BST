@@ -44,7 +44,7 @@ export default class Tree {
         lastNode[direction] = new Node(value);
     }
     deleteItem(value) {
-        if (!value) { console.log('Missing Value'); return false; }
+        if (value === undefined || value === null) { console.log('Missing Value'); return false; }
         if (!this.includes(value)) { console.log('Value not found in tree'); return false; }
         if (this.root === null) { console.log("No tree root. Make sure a tree actually exists"); return false; }
         let prevNode = null;
@@ -59,26 +59,34 @@ export default class Tree {
 
         if (node === null) return false;
 
-        if ([node.left, node.right].every(n => n === null)) {
-            // if target node is root AND leaf
-            if (prevNode === null) this.root = null;
-            prevNode[direction] = null;
+        // If delete target has no children
+        if ([node?.left, node?.right].every(n => n === null)) {
+            if (prevNode === null) { this.root = null; }
+            else { prevNode[direction] = null; }
             return true;
         }
 
-        // If target has one child node only
+        // If delete target has one child node only
         if (node.left !== null && node.right === null || node.left === null && node.right !== null) {
             // set the previous Node's child to the deletion Target's current child
-            node.left !== null ? prevNode[direction] = node.left : prevNode[direction] = node.right;
+            const child = node.left !== null ? node.left : node.right;
+            prevNode === null ? this.root = child : prevNode[direction] = child;
             return true;
         }
 
-
-
-
+        if ([node.left, node.right].every(n => n !== null))  {
+            const successor = this.successor(node);
+            this.deleteItem(successor.value);
+            node.value = successor.value;
+        }
         return true;
     }
-    successor(value) {
 
+    successor(node) {
+        node = node.right;
+        while (node !== null && node.left !== null)  {
+            node = node.left;
+        }
+        return node;
     }
 }
