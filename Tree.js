@@ -1,4 +1,5 @@
 import Node from './Node.js';
+import Queue from './Queue.js';
 
 export default class Tree {
     constructor(arr) {
@@ -74,6 +75,7 @@ export default class Tree {
             return true;
         }
 
+        // If delete target has two child nodes
         if ([node.left, node.right].every(n => n !== null))  {
             const successor = this.successor(node);
             this.deleteItem(successor.value);
@@ -88,5 +90,23 @@ export default class Tree {
             node = node.left;
         }
         return node;
+    }
+    levelOrderForEach(func){
+    if (this.root === null) return false;
+    if (typeof func !== 'function') { throw new Error('Callback is required'); }
+    const res = [];
+
+    const q = new Queue();
+    q.enqueue(this.root);
+
+    while (q.length() > 0) {
+    let node = q.dequeue();
+    res.push(node.value);
+    if (node.left) q.enqueue(node.left);
+    if (node.right) q.enqueue(node.right);
+    }
+
+    res.forEach(v => func(v));
+    return true;
     }
 }

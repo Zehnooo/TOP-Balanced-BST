@@ -29,3 +29,12 @@ t.deleteItem(67);
 t.deleteItem(6345);
 t.deleteItem(8);
 prettyPrint(t.root);
+
+function log(value){
+    console.log(value);
+}
+
+const square = (v) => { console.log(v * v); }
+
+t.levelOrderForEach(square);
+//t.levelOrderForEach('chicken');
