@@ -91,11 +91,11 @@ export default class Tree {
         }
         return node;
     }
-    levelOrderForEach(func){
+    levelOrder(func){
     if (this.root === null) return false;
     if (typeof func !== 'function') { throw new Error('Callback is required'); }
-    const res = [];
 
+    const res = [];
     const q = new Queue();
     q.enqueue(this.root);
 
@@ -109,4 +109,52 @@ export default class Tree {
     res.forEach(v => func(v));
     return true;
     }
+    inOrder(func) {
+        if (this.root === null) return false;
+        if (typeof func !== 'function') { throw new Error('Callback is required'); }
+
+        const res = [];
+        this.#inOrderRecur(this.root, res);
+        this.#forEach(res, func);
+        return true;
+    }
+    #inOrderRecur(node, res) {
+        if (node === null) { return; }
+        this.#inOrderRecur(node.left, res);
+        res.push(node.value);
+        this.#inOrderRecur(node.right, res);
+    }
+    preOrder(func) {
+        if (this.root === null) return false;
+        if (typeof func !== 'function') { throw new Error('Callback is required'); }
+
+        const res = [];
+        this.#preOrderRecur(this.root, res);
+        this.#forEach(res, func);
+        return true;
+    }
+    #preOrderRecur(node, res) {
+        if (node === null) { return; }
+        res.push(node.value);
+        this.#preOrderRecur(node.left, res);
+        this.#preOrderRecur(node.right, res);
+    }
+    postOrder(func) {
+        if (this.root === null) return false;
+        if (typeof func !== 'function') { throw new Error('Callback is required'); }
+
+        const res = [];
+        this.#postOrderRecur(this.root, res);
+        this.#forEach(res, func);
+
+        return true;
+    }
+    #postOrderRecur(node, res) {
+        if (node === null) return;
+        this.#postOrderRecur(node.left, res);
+        this.#postOrderRecur(node.right, res);
+        res.push(node.value);
+    }
+    #forEach(arr, func) { arr.forEach(x => func(x)); }
+
 }
