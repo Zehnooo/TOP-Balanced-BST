@@ -157,11 +157,8 @@ export default class Tree {
     }
     #forEach(arr, func) { arr.forEach(x => func(x)); }
     height(value) {
-
-        let node = this.#find(value);
-        if (node === undefined) return undefined;
-
-        return this.#heightRecur(node);
+        const node = this.#find(value);
+        return node === undefined ? undefined : this.#heightRecur(node);
     }
     #heightRecur(node) {
         if (node === null) return -1;
@@ -170,6 +167,19 @@ export default class Tree {
         const rightHeight = this.#heightRecur(node.right);
 
         return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    depth(value) {
+        return this.#depthRecur(this.root, value);
+    }
+    #depthRecur(node, value) {
+        if (node === null) return undefined;
+        if (node.value === value) return 0;
+
+        let direction = value < node.value ? 'left' : 'right';
+        const depth = this.#depthRecur(node[direction], value);
+
+        return depth === undefined ? undefined : depth + 1;
     }
 
     #find(value) {
@@ -182,4 +192,33 @@ export default class Tree {
 
         return undefined;
     }
+    isBalanced() {
+    // For every node, height difference between left and right subtrees is no more than 1 AND both subtrees are also balanced.
+        const root = this.root;
+        if (root === null) { return true; }
+        if (root.left === null && root.right === null) { return true; }
+
+        return this.#balancedRecur(root);
+    }
+    #balancedRecur(node) {
+        if (node === null) return true;
+
+        const left =
+            node.left === null ? -1 : this.height(node.left.value);
+
+        const right =
+            node.right === null ? -1 : this.height(node.right.value);
+
+        if (Math.abs(left - right) > 1) return false;
+
+        return [node.left, node.right].every( c => { return this.#balancedRecur(c); });
+    }
+    rebalance() {
+        const values = [];
+        this.inOrder(val => { values.push(val); });
+        const root = this.#buildTree(values);
+        this.root = root;
+        return root !== null;
+    }
+
 }
