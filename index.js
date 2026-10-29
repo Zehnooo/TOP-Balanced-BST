@@ -15,10 +15,15 @@ const t = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 43, 52, 55, 67, 84, 91]);
 console.log('2. Balanced Tree: (Expect: true)', t.isBalanced());
 
 // 3. Print out all elements in level, pre, post, and in order.
-console.log('3A. Level-Order: ', t.levelOrder((v) => { console.log(v); }));
-console.log('3B. Pre-Order: ', t.preOrder((v) => { console.log(v); }));
-console.log('3C. Level-Order: ', t.postOrder((v) => { console.log(v); }));
-console.log('3D. Level-Order: ', t.inOrder((v) => { console.log(v); }));
+let values = [];
+console.log('3A. Level-Order: '); t.levelOrder((v) => { values.push(v); });
+console.log(values); values = [];
+console.log('3B. Pre-Order: '); t.preOrder((v) => { values.push(v); });
+console.log(values); values = [];
+console.log('3C. Post-Order: '); t.postOrder((v) => { values.push(v); });
+console.log(values); values = [];
+console.log('3D. In-Order: ', ); t.inOrder((v) => { values.push(v); });
+console.log(values); values = [];
 
 // 4. Unbalance the tree by adding several numbers whose value is more than 100.
 for (let i = 101; i < 108; i++) { console.log('4. Inserting Value: ', i); t.insert(i); }
@@ -33,10 +38,15 @@ t.rebalance();
 console.log('7. Balanced Tree: (Expect: true)', t.isBalanced());
 
 // 8. Print out all elements in level, pre, post, and in order.
-console.log('8A. Level-Order: ', t.levelOrder((v) => { console.log(v); }));
-console.log('8B. Pre-Order: ', t.preOrder((v) => { console.log(v); }));
-console.log('8C. Level-Order: ', t.postOrder((v) => { console.log(v); }));
-console.log('8D. Level-Order: ', t.inOrder((v) => { console.log(v); }));
+
+console.log('8A. Level-Order: '); t.levelOrder((v) => { values.push(v); });
+console.log(values); values = [];
+console.log('8B. Pre-Order: '); t.preOrder((v) => { values.push(v); });
+console.log(values); values = [];
+console.log('8C. Post-Order: '); t.postOrder((v) => { values.push(v);  });
+console.log(values); values = [];
+console.log('8D. In-Order: '); t.inOrder((v) => { values.push(v); });
+console.log(values); values = [];
 
 prettyPrint(t.root);
 
