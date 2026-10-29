@@ -92,8 +92,8 @@ export default class Tree {
         return node;
     }
     levelOrder(func){
-    if (this.root === null) return false;
     if (typeof func !== 'function') { throw new Error('Callback is required'); }
+    if (this.root === null) return false;
 
     const res = [];
     const q = new Queue();
@@ -110,8 +110,8 @@ export default class Tree {
     return true;
     }
     inOrder(func) {
-        if (this.root === null) return false;
         if (typeof func !== 'function') { throw new Error('Callback is required'); }
+        if (this.root === null) return false;
 
         const res = [];
         this.#inOrderRecur(this.root, res);
@@ -125,8 +125,8 @@ export default class Tree {
         this.#inOrderRecur(node.right, res);
     }
     preOrder(func) {
-        if (this.root === null) return false;
         if (typeof func !== 'function') { throw new Error('Callback is required'); }
+        if (this.root === null) return false;
 
         const res = [];
         this.#preOrderRecur(this.root, res);
@@ -140,8 +140,8 @@ export default class Tree {
         this.#preOrderRecur(node.right, res);
     }
     postOrder(func) {
-        if (this.root === null) return false;
         if (typeof func !== 'function') { throw new Error('Callback is required'); }
+        if (this.root === null) return false;
 
         const res = [];
         this.#postOrderRecur(this.root, res);
