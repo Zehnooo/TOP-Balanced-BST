@@ -7,9 +7,16 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
 }
 
+const randomArray = (length) => {
+    if (length < 1) return [];
+    let arr = [];
+    for (let i = 0; i < length; i++) { arr.push(Math.floor(Math.random() * 100) + 1) }
+    return arr;
+}
+
 
 // 1. Create a binary search tree from an array of random numbers with each element having a value less than 100. You can create a function that returns an array of random numbers every time you call it if you wish.
-const t = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 43, 52, 55, 67, 84, 91]);
+const t = new Tree(randomArray(20));
 
 // 2. Confirm that the tree is balanced by calling isBalanced().
 console.log('2. Balanced Tree: (Expect: true)', t.isBalanced());
