@@ -10,7 +10,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 const randomArray = (length) => {
     if (length < 1) return [];
     let arr = [];
-    for (let i = 0; i < length; i++) { arr.push(Math.floor(Math.random() * 100) + 1) }
+    for (let i = 0; i < length; i++) { arr.push(Math.floor(Math.random() * 100)) }
     return arr;
 }
 
