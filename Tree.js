@@ -193,11 +193,9 @@ export default class Tree {
         return undefined;
     }
     isBalanced() {
-    // For every node, height difference between left and right subtrees is no more than 1 AND both subtrees are also balanced.
         const root = this.root;
         if (root === null) { return true; }
         if (root.left === null && root.right === null) { return true; }
-
         return this.#balancedRecur(root);
     }
     #balancedRecur(node) {
